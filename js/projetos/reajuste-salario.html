@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculo porcentagem</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+        body{
+            background: rgb(4, 110, 136);
+            font-family: 'Noto Sans', sans-serif;
+        }
+        header{
+            text-align: center;
+            font-style: bold;
+            color: whitesmoke;
+        }
+        section#main{
+            margin: 0 auto;
+            padding: 15px;
+            background: whitesmoke;
+            width: 280px;
+            height: 270px;
+            border-radius: 3%;
+            line-height: 32px;
+        }
+        h2{
+            text-align: center;
+        }
+        input#porc, input#salario{
+            color: black;
+            font-family: 'Cantarell', sans-serif;
+            border-radius: 20px;
+            border: 0;
+            text-align: center;
+            background: rgb(235, 242, 247);
+        }
+        input#calcular{
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+            width: 250px;
+            height: 30px;
+            background: rgb(4, 110, 136);
+            color: whitesmoke;
+            font-family: 'Noto sans', sans-serif;
+            border-radius: 20px;
+            border: 0;
+        }
+        footer{
+            color: whitesmoke;
+            text-align: center;
+            padding-top: 40px;
+        }
+        b#menos{
+            color: rgb(192, 1, 1);
+        }
+        b#mais{
+            color: rgb(0, 112, 0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calculo de reajuste de Salario</h1>
+    </header>
+    <section id="main">
+        <h2>Insira as informações</h2>
+        Selecione uma opção: <br>
+        <input type="radio" name="op" id="desconto" checked>Desconto
+        <input type="radio" name="op" id="Aumento">Aumento<br>
+        Porcentagem: <input type="text" name="porc" id="porc" inputmode="numeric" maxlength="13"><br>
+        Salario: <input type="text" name="salario" id="salario" inputmode="numeric" maxlength="13">
+        <input type="submit" value="calcular" id="calcular" onclick="calcular()">
+    </section><br><br>
+    <section id="result">
+
+    </section>
+    <footer>
+        <p>&copy; SharpBlue 2022</p>
+    </footer>
+    <script>
+        function calcular(){
+            let op, porc, sal, salCalc, sec
+            sec = document.getElementById('result')
+            op = document.querySelectorAll('input')
+            porc = document.getElementById('porc')
+            sal = document.getElementById('salario')
+
+            if (op[0].checked){
+                salCalc = Number(sal.value) * Number(porc.value) / 100
+                salFin = Number(sal.value) - salCalc
+                sec.style = `margin: 0 auto;
+                    padding: 15px;
+                    background: whitesmoke;
+                    width: 280px;
+                    height: 120px;
+                    border-radius: 3%;
+                    line-height: 20px;
+                    text-align: center;`
+                sec.innerHTML = `<h1>Salario reajustado</h1><br>
+                                 R$${salFin.toFixed(2).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})} <b id="menos">( -R$${salCalc.toFixed(2)})</b>`
+            } else {
+                salCalc = Number(sal.value) * Number(porc.value) / 100
+                salFin = Number(sal.value) + salCalc
+                sec.style = `margin: 0 auto;
+                    padding: 15px;
+                    background: whitesmoke;
+                    width: 280px;
+                    height: 120px;
+                    border-radius: 3%;
+                    line-height: 20px;
+                    text-align: center;`
+                sec.innerHTML = `<h1>Salario reajustado</h1><br>
+                                 R$${salFin.toFixed(2).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})} <b id="mais">( +R$${salCalc.toFixed(2)})</b>`
+            }
+        }
+    </script>
+</body>
+</html>
